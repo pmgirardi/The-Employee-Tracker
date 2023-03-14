@@ -1,29 +1,41 @@
 -- As the image illustrates, your schema should contain the following three tables:
+DROP DATABASE IF EXISTS employee_db;
 
-* `department`
+-- Creates the "employee_db" database --
 
-    * `id`: `INT PRIMARY KEY`
+CREATE DATABASE employee_db;
 
-    * `name`: `VARCHAR(30)` to hold department name
+-- Makes it so all of the following code will affect inventory_db --
 
-* `role`
+USE employee_db;
 
-    * `id`: `INT PRIMARY KEY`
+-- Creates the 'department' table
 
-    * `title`: `VARCHAR(30)` to hold role title
+CREATE TABLE departments (
+    id INT NOT NULL, 
+    name VARCHAR(30) NOT NULL, 
+    PRIMARY KEY (id)
+);
 
-    * `salary`: `DECIMAL` to hold role salary
+-- Creates the 'role' table
 
-    * `department_id`: `INT` to hold reference to department role belongs to
+CREATE TABLE roles (
+    id INT NOT NULL,
+    title VARCHAR(30) NOT NULL, 
+    salary  DECIMAL(10,2) NOT NULL, 
+    department_id INT UNSIGNED NOT NULL REFERENCES departments(id), 
+    PRIMARY KEY (id)
+)
 
-* `employee`
+-- Creates the `employee` table
+CREATE TABLE employee (
+    id INT NOT NULL,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NUL,
+    role_id INT UNSIGNED NOT NULL REFERENCES roles(id),
+    manager_id INT UNSIGNED NOT NULL REFERENCES manger(id)
+    PRIMARY KEY (id)
+);
 
-    * `id`: `INT PRIMARY KEY`
-
-    * `first_name`: `VARCHAR(30)` to hold employee first name
-
-    * `last_name`: `VARCHAR(30)` to hold employee last name
-
-    * `role_id`: `INT` to hold reference to employee role
-
-    * `manager_id`: `INT` to hold reference to another employee that is the manager of the current employee (`null` if the employee has no manager)
+-- `employee`
+-- `manager_id`: `INT` to hold reference to another employee that is the manager of the current employee (`null` if the employee has no manager)
