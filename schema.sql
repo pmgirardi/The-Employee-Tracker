@@ -17,23 +17,23 @@ CREATE TABLE departments (
     PRIMARY KEY (id)
 );
 
--- Creates the 'role' table
+-- Creates the 'roles' table
 
 CREATE TABLE roles (
     id INT NOT NULL,
     title VARCHAR(30) NOT NULL, 
-    salary  DECIMAL(10,2) NOT NULL, 
+    salary DECIMAL(10,2) NOT NULL, 
     department_id INT UNSIGNED NOT NULL REFERENCES departments(id), 
     PRIMARY KEY (id)
-)
+);
 
 -- Creates the `employee` table
 CREATE TABLE employee (
     id INT NOT NULL,
     first_name VARCHAR(30) NOT NULL,
-    last_name VARCHAR(30) NOT NUL,
+    last_name VARCHAR(30) NOT NULL,
     role_id INT UNSIGNED NOT NULL REFERENCES roles(id),
-    manager_id INT UNSIGNED NOT NULL REFERENCES manger(id)
+    manager_id INT UNSIGNED NOT NULL REFERENCES manager(id),
     PRIMARY KEY (id)
 );
 
