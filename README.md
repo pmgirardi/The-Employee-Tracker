@@ -1,50 +1,68 @@
+
 # The-Employee-Tracker
-Build a command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.
+
+Business owner can use this terminal application to view and manage the departments, roles, and employees in a company, in order to manage their business.
 
 
-Set up:
+## Description
 
-1.  You’ll need to use the [Inquirer package](https://www.npmjs.com/package/inquirer/v/8.2.4) to interact with the user via the command line. Install inquirer 'npm i inquirer@8.2.4 
-2. You’ll need to use the [MySQL2 package](https://www.npmjs.com/package/mysql2) to connect to your MySQL database and perform queries
-3. You’ll need to use the [console.table package](https://www.npmjs.com/package/console.table) to print MySQL rows to the console.
+With this application, a user can: 
+- View all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role.
+- View all departments with a formatted table showing department names and department ids
+- View all roles with the job title, role id, the department that role belongs to, and the salary for that role.
+- View all employees with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to.
+- Add a department to enter the name of the department and add that department to the database.
+- Add a role to enter the name, salary, and department for the role and add that role to the database.
+- Add an employee to enter the employee’s first name, last name, role, and manager, and add that employee to the database.
+- Update an employee role to select an employee to update and their new role is updated in the database.
 
-Files: 
+## Demo
 
-1. You might also want to make your queries asynchronous. MySQL2 exposes a `.promise()` function on Connections to upgrade an existing non-Promise connection to use Promises. To learn more and make your queries asynchronous, refer to the [npm documentation on MySQL2](https://www.npmjs.com/package/mysql2).
 
-Design the database schema as shown in the following image:
+[Click here for walk through video](https://drive.google.com/file/d/1tO6JWQyVw1-4X7BTvem-8mzOQTKoVv6_/view)
 
-![Database schema includes tables labeled “employee,” role,” and “department.”](./Assets/12-sql-homework-demo-01.png)
+## Technologies 
 
-As the image illustrates, your schema should contain the following three tables:
+**Runtime:** Node.js
 
-* `department`
+**Lanuage:** Javascript
 
-    * `id`: `INT PRIMARY KEY`
+**Dependencies:** 
 
-    * `name`: `VARCHAR(30)` to hold department name
+    "console.table": "^0.10.0",
+    "express": "^4.18.2",
+    "inquirer": "^8.2.4",
+    "mysql2": "^3.2.0"
 
-* `role`
 
-    * `id`: `INT PRIMARY KEY`
+## Installation
 
-    * `title`: `VARCHAR(30)` to hold role title
+Install all the following dependencices:
+```
+npm install console.table
 
-    * `salary`: `DECIMAL` to hold role salary
+npm install inquirer
 
-    * `department_id`: `INT` to hold reference to department role belongs to
+npm install mysql2
 
-* `employee`
+npm install express
+```
 
-    * `id`: `INT PRIMARY KEY`
+## Usage
 
-    * `first_name`: `VARCHAR(30)` to hold employee first name
-
-    * `last_name`: `VARCHAR(30)` to hold employee last name
-
-    * `role_id`: `INT` to hold reference to employee role
-
-    * `manager_id`: `INT` to hold reference to another employee that is the manager of the current employee (`null` if the employee has no manager)
-
-You might want to use a separate file that contains functions for performing specific SQL queries you'll need to use. A constructor function or class could be helpful for organizing these. You might also want to include a `seeds.sql` file to pre-populate your database, making the development of individual features much easier.
-
+Excute MySQL in the terminal with the following command:
+```
+mysql -u root -p
+```
+Execute the schema file:
+```
+SOURCE db/schema.sql;
+```
+Seed the database:
+```
+SOURCE db/seeds.sql;
+```
+Run application:
+```
+npm start;
+```
